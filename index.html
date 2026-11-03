@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+</head>
+<body>
+
+    <h1>Login Form</h1>
+
+    <input type="text" id="username" placeholder="Enter username">
+    <br><br>
+
+    <input type="password" id="password" placeholder="Enter password">
+    <br><br>
+
+    <button id="btn">Login</button>
+
+    <script>
+        const btn = document.getElementById('btn');
+
+        btn.addEventListener('click', async () => {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const userData = {
+                username,
+                password
+            };
+
+            const response = await fetch('http://localhost:3000/signin', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userData)
+            });
+
+            const result = await response.text();
+            console.log(result);
+        });
+    </script>
+
+</body>
+</html>
